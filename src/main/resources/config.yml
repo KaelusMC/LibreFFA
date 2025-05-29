@@ -1,4 +1,4 @@
-prefix: "&b&lFFA &7|&r " 
+prefix: "&b&lLibreFFA &7|&r "
 
 # Streak settings
 StreakThreshold: 5
@@ -23,8 +23,7 @@ smoothSpawnTeleport: true
 show-ping-on-right-click:
   enabled: true
   message: "&b%clicked_player% &7has &b%ping%&7ms"
-join-message: "&7%player_name% joined."
-quit-message: "&7%player_name% left."
+
 launchpad:
   force: 1.8
 deathMessages:
