@@ -23,7 +23,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class RegenerationImpl {
     private Runnable regenTask;

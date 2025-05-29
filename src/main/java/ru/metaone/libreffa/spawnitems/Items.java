@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.spawnitems;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.api.events.SpawnItemsGiveEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,15 +19,15 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.util.Set;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 import static org.bukkit.Bukkit.getServer;
 
 public class Items {
-    private static Main main;
+    private static LibreFFA main;
 
     private static FileConfiguration spawnItemsConfig;
 
-    public Items(Main plugin) {
+    public Items(LibreFFA plugin) {
         this.main = plugin;
         getServer().getPluginManager().registerEvents(new EventListener(main), main);
         loadSpawnItemsConfig();

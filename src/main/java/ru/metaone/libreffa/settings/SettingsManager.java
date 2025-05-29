@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.settings;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.settings.menu.SettingsMenu;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,12 +14,12 @@ import java.util.List;
 
 public class SettingsManager {
 
-    private static final Main main;
+    private static final LibreFFA main;
     private static File configFile;
     private static FileConfiguration config;
 
     static {
-        main = Main.getInstance();
+        main = LibreFFA.getInstance();
         configFile = new File(main.getDataFolder(), "data/settings-data.yml");
         if (!configFile.getParentFile().exists()) {
             configFile.getParentFile().mkdirs();
@@ -106,7 +106,7 @@ public class SettingsManager {
         String enabled = SettingsMenu.getSettingsConfig().getString("menu.placeholders.enabled");
         String disabled = SettingsMenu.getSettingsConfig().getString("menu.placeholders.disabled");
 
-        return isEnabled ? Main.formatColors(enabled) : Main.formatColors(disabled);
+        return isEnabled ? LibreFFA.formatColors(enabled) : LibreFFA.formatColors(disabled);
     }
 
     public static String getUnformattedSettingStatus(Player player, String settingName) {

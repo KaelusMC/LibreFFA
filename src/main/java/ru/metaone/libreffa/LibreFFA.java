@@ -15,7 +15,6 @@ import ru.metaone.libreffa.commands.StatsCommand;
 import ru.metaone.libreffa.commands.ReplyCommand;
 import ru.metaone.libreffa.commands.CoolArenaCommand;
 import ru.metaone.libreffa.commands.settings.*;
-import ru.metaone.libreffa.commands.settings.*;
 import ru.metaone.libreffa.deathmessages.DeathMessagesManager;
 import ru.metaone.libreffa.commands.FlyCommand;
 import ru.metaone.libreffa.kits.KitManager;
@@ -42,9 +41,9 @@ import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class Main extends JavaPlugin {
+public final class LibreFFA extends JavaPlugin {
 
-    private static Main instance;
+    private static LibreFFA instance;
     private DatabaseManager dbm;
     public static String prefix;
     private FileConfiguration config;
@@ -69,10 +68,10 @@ public final class Main extends JavaPlugin {
         Commands();
 
         try {
-            File configFile = new File(Main.getInstance().getDataFolder(), "menus/settings_menu.yml");
+            File configFile = new File(LibreFFA.getInstance().getDataFolder(), "menus/settings_menu.yml");
             if (!configFile.exists()) {
                 configFile.getParentFile().mkdirs();
-                Main.getInstance().saveResource("menus/settings_menu.yml", false);
+                LibreFFA.getInstance().saveResource("menus/settings_menu.yml", false);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -207,7 +206,7 @@ public final class Main extends JavaPlugin {
         getCommand("togglequickrespawn").setExecutor(new ToggleQuickRespawnCommand());
     }
 
-    public static Main getInstance() {
+    public static LibreFFA getInstance() {
         return instance;
     }
 

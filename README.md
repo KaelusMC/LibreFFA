@@ -13,10 +13,10 @@
     
 ## Overview
 
-FFA is a next-generation plugin designed for PvP/FFA servers, offering a robust API and a bunch of features.
+LibreFFA is a next-generation plugin designed for PvP/FFA servers, offering a robust API and a bunch of features. It is a fork and a continuation of the now-archived XyrisFFA plugin.
 
 ## Requirements
-To use the FFA plugin, you need to use Minecraft version 1.19 or higher, Java version 17 or above, Spigot or any of its forks, and You need PlaceholderAPI to use this plugin.
+To use the FFA plugin, you need to use Minecraft version 1.21 or higher, Java version 21 or above, Paper or any of its forks, and You need PlaceholderAPI to use this plugin.
 
 #  Features
 * Arenas System, Includes cool arenas for ranked users.
@@ -87,7 +87,7 @@ Everything is editable via the `config.yml` file.
 Please feel free to report any glitches or bugs via our [Discord server](https://discord.gg/XBmrFsg5eR).
 
 ## Download
-To get the FFA plugin, Purchase it from our [BuiltByBit](https://builtbybit.com/resources/xyris-ffa.44950/) page. Alternatively, compile it yourself.
+Download via GitHub Actions. Alternatively, compile it yourself.
 
 ### License
 The FFA plugin is licensed under [GNU General Public License](https://github.com/Darkxx14/FFA?tab=GPL-3.0-1-ov-file) (GPL).

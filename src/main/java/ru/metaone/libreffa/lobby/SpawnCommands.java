@@ -1,21 +1,21 @@
 package ru.metaone.libreffa.lobby;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 
 public class SpawnCommands implements CommandExecutor {
 
     private final SpawnManager spawnManager;
-    private final Main main;
+    private final LibreFFA main;
 
-    public SpawnCommands(SpawnManager spawnManager, Main main) {
+    public SpawnCommands(SpawnManager spawnManager, LibreFFA main) {
         this.spawnManager = spawnManager;
         this.main = main;
     }
@@ -34,7 +34,7 @@ public class SpawnCommands implements CommandExecutor {
             return true;
         } else if (label.equalsIgnoreCase("spawn") || label.equalsIgnoreCase("ffa:spawn")) {
             SpawnManager.teleportToSpawn(player);
-            String message = Main.getInstance().getConfig().getString("messages.teleported-to-spawn", "&7Teleported you to the spawn!");
+            String message = LibreFFA.getInstance().getConfig().getString("messages.teleported-to-spawn", "&7Teleported you to the spawn!");
             player.sendMessage(formatColors(message));
             return true;
         }

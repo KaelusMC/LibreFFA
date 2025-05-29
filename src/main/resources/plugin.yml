@@ -1,7 +1,7 @@
 name: LibreFFA
 version: '1.0.4'
-main: ru.metaone.libreffa.Main
-api-version: '1.19'
+main: ru.metaone.libreffa.LibreFFA
+api-version: '1.21'
 softdepend:
   - PlaceholderAPI
   - ProtocolLib
@@ -9,7 +9,8 @@ softdepend:
 authors:
   - Darkxx
   - XyrisPlugins
-description: A Next Gen 1.19 FFA Core.
+  - MetaOne
+description: A Next Gen 1.21 FFA Core.
 
 libraries:
   - com.zaxxer:HikariCP:5.1.0

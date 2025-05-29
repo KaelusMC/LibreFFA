@@ -1,13 +1,13 @@
 package ru.metaone.libreffa.commands;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class ReplyCommand implements CommandExecutor {
 
@@ -26,7 +26,7 @@ public class ReplyCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (!messageCommand.lastMessaged.containsKey(player)) {
-            String noRecentMessage = Main.getInstance().getConfig().getString("messages.no-resent-message" , "&cYou have not messaged anyone recently.");
+            String noRecentMessage = LibreFFA.getInstance().getConfig().getString("messages.no-resent-message" , "&cYou have not messaged anyone recently.");
 
             player.sendMessage(formatColors(noRecentMessage));
             return true;
@@ -35,7 +35,7 @@ public class ReplyCommand implements CommandExecutor {
         Player recipient = messageCommand.lastMessaged.get(player);
 
         if (args.length < 1) {
-            String usageReply = Main.getInstance().getConfig().getString("usage.reply", "&c/reply <message>");
+            String usageReply = LibreFFA.getInstance().getConfig().getString("usage.reply", "&c/reply <message>");
             player.sendMessage(formatColors(usageReply));
             return true;
         }

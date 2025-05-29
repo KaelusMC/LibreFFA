@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.commands;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.settings.SettingsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class MessageCommand implements CommandExecutor {
     private final FileConfiguration config;
@@ -32,7 +32,7 @@ public class MessageCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length < 2) {
-            String usageMessage = Main.getInstance().getConfig().getString("usage.message", "&c/message <player> <message>");
+            String usageMessage = LibreFFA.getInstance().getConfig().getString("usage.message", "&c/message <player> <message>");
             player.sendMessage(formatColors(usageMessage));
             return true;
         }
@@ -57,7 +57,7 @@ public class MessageCommand implements CommandExecutor {
 
     void sendMessage(Player sender, Player recipient, String message) {
         if (!SettingsManager.hasEnabledSetting(recipient, "privateMessages")) {
-            String msgsDisabled = Main.getInstance().getConfig().getString("messages.private-messages-disabled", "&c%player% has their Private Messages disabled.")
+            String msgsDisabled = LibreFFA.getInstance().getConfig().getString("messages.private-messages-disabled", "&c%player% has their Private Messages disabled.")
                     .replace("%player%", recipient.getName());
             sender.sendMessage(formatColors(msgsDisabled));
             return;

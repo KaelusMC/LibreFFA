@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.stats;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -11,7 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class Stats implements Listener {
 
@@ -38,7 +38,7 @@ public class Stats implements Listener {
                 if (currentStreak % this.killStreakThreshold == 0) {
                     String playerName = attacker.getName();
                     int finalCurrentStreak = currentStreak;
-                    Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+                    Bukkit.getScheduler().runTaskLater(LibreFFA.getInstance(), () -> {
                         broadcastStreakMessage(playerName, finalCurrentStreak, "StreakMessage");
                     }, 3);
                 }
@@ -52,7 +52,7 @@ public class Stats implements Listener {
 
             if (currentStreak >= this.deathStreakThreshold) {
                 String playerName = victim.getName();
-                Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+                Bukkit.getScheduler().runTaskLater(LibreFFA.getInstance(), () -> {
                     broadcastStreakMessage(playerName, currentStreak, "StreakLose");
                 }, 3);
             }

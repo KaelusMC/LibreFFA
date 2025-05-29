@@ -19,14 +19,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.metaone.libreffa.Main.formatColors;
-import static ru.metaone.libreffa.Main.prefix;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
+import static ru.metaone.libreffa.LibreFFA.prefix;
 
 public class Commands implements CommandExecutor, TabCompleter {
 
-    private final Main main;
+    private final LibreFFA main;
 
-    public Commands(Main main) {
+    public Commands(LibreFFA main) {
         this.main = main;
     }
 
@@ -37,7 +37,7 @@ public class Commands implements CommandExecutor, TabCompleter {
         }
 
         if (!sender.hasPermission("ffa.admin")) {
-            String noPermission = Main.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
+            String noPermission = LibreFFA.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
             sender.sendMessage(formatColors(noPermission));
             return true;
         }
@@ -51,10 +51,10 @@ public class Commands implements CommandExecutor, TabCompleter {
         switch (subCommand) {
             // Reload Command
             case "reload":
-                Main.getInstance().reloadConfig();
+                LibreFFA.getInstance().reloadConfig();
                 Items.loadSpawnItemsConfig();
                 sender.sendMessage(formatColors(" "));
-                sender.sendMessage(formatColors(prefix + "&7" + Main.getInstance().getDescription().getVersion()));
+                sender.sendMessage(formatColors(prefix + "&7" + LibreFFA.getInstance().getDescription().getVersion()));
                 sender.sendMessage(formatColors(" "));
                 sender.sendMessage(formatColors("&7Successfully reloaded the configuration files."));
                 sender.sendMessage(formatColors("&7Some things might not reload, please restart the server"));

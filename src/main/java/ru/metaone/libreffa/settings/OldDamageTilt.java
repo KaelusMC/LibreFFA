@@ -5,13 +5,13 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import net.minecraft.network.protocol.game.ClientboundHurtAnimationPacket;
 import org.bukkit.entity.Player;
 
 public class OldDamageTilt extends PacketAdapter {
 
-    public OldDamageTilt(Main main) {
+    public OldDamageTilt(LibreFFA main) {
         super(main, ListenerPriority.NORMAL, PacketType.Play.Server.HURT_ANIMATION);
     }
 

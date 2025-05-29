@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.commands;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class PingCommand implements CommandExecutor {
 
@@ -34,7 +34,7 @@ public class PingCommand implements CommandExecutor {
             sendPingInfo(player, targetPlayer);
             return true;
         }
-        String usagePing = Main.getInstance().getConfig().getString("usage.ping", "&cUsage, /ping [playerName]");
+        String usagePing = LibreFFA.getInstance().getConfig().getString("usage.ping", "&cUsage, /ping [playerName]");
         player.sendMessage(formatColors(usagePing));
         return true;
     }
@@ -42,7 +42,7 @@ public class PingCommand implements CommandExecutor {
     private void sendPingInfo(Player sender, Player target) {
         int ping = getPing(target);
 
-        List<String> messages = Main.getInstance().getConfig().getStringList("messages.ping.format");
+        List<String> messages = LibreFFA.getInstance().getConfig().getStringList("messages.ping.format");
         String otherPlayer = target.getName();
 
         for (String message : messages) {

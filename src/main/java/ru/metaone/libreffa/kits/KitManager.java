@@ -2,7 +2,7 @@ package ru.metaone.libreffa.kits;
 
 import ru.metaone.libreffa.api.events.KitGiveEvent;
 import org.bukkit.Bukkit;
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class KitManager {
 
@@ -33,7 +33,7 @@ public class KitManager {
     }
 
     public static File createKitsFolder() {
-        File folder = new File(Main.getInstance().getDataFolder(), "kits");
+        File folder = new File(LibreFFA.getInstance().getDataFolder(), "kits");
         if (!folder.exists()) {
             folder.mkdirs();
         }
@@ -66,7 +66,7 @@ public class KitManager {
     }
 
     public static void deleteKit(String kitName) {
-        File kitFile = new File(Main.getInstance().getKitsFolder(), kitName + ".yml");
+        File kitFile = new File(LibreFFA.getInstance().getKitsFolder(), kitName + ".yml");
         if (kitFile.exists()) {
             kitFile.delete();
         }
@@ -116,7 +116,7 @@ public class KitManager {
     }
 
     public static void listKits(CommandSender sender) {
-        File kitsFolder = Main.getInstance().getKitsFolder();
+        File kitsFolder = LibreFFA.getInstance().getKitsFolder();
         File[] kitFiles = kitsFolder.listFiles();
         if (kitFiles != null) {
             sender.sendMessage(formatColors("\n"));
@@ -134,7 +134,7 @@ public class KitManager {
 
     public static List<String> getKitNames() {
         List<String> kitNames = new ArrayList<>();
-        File[] kitFiles = Main.getInstance().getKitsFolder().listFiles();
+        File[] kitFiles = LibreFFA.getInstance().getKitsFolder().listFiles();
         if (kitFiles != null) {
             for (File kitFile : kitFiles) {
                 if (kitFile.isFile()) {
@@ -147,7 +147,7 @@ public class KitManager {
     }
 
     public static boolean isKitExisting(String kitName) {
-        File kitFile = new File(Main.getKitsFolder(), kitName + ".yml");
+        File kitFile = new File(LibreFFA.getKitsFolder(), kitName + ".yml");
         return kitFile.exists();
     }
 }

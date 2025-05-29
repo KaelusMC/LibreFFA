@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.deathmessages;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -13,16 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class DeathMessagesManager implements Listener {
     private List<String> deathMessages;
     private List<String> disabledWorlds;
     private boolean disabled;
     private FileConfiguration config;
-    private Main main;
+    private LibreFFA main;
 
-    public DeathMessagesManager(Main main) {
+    public DeathMessagesManager(LibreFFA main) {
         this.main = main;
         deathMessages = new ArrayList<>();
         disabledWorlds = new ArrayList<>();
@@ -70,7 +70,7 @@ public class DeathMessagesManager implements Listener {
         String victimName = (victim != null) ? victim.getName() : "Unknown";
         double attackerHealth = (attacker != null) ? attacker.getHealth() : 0.00;
         double victimHealth = (victim != null) ? victim.getHealth() : 0.00;
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(LibreFFA.getInstance(), () -> {
             Bukkit.broadcastMessage(formatColors(Placeholders(attackerName, victimName, attackerHealth, victimHealth)));
         });
     }

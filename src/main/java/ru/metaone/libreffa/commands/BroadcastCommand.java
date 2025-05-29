@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.commands;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.api.events.BroadcastEvent;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class BroadcastCommand implements CommandExecutor {
 
@@ -40,7 +40,7 @@ public class BroadcastCommand implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usageBcast = Main.getInstance().getConfig().getString("usage.broadcast", "&cUsage, /broadcast <message>");
+            String usageBcast = LibreFFA.getInstance().getConfig().getString("usage.broadcast", "&cUsage, /broadcast <message>");
             sender.sendMessage(formatColors(usageBcast));
             return true;
         }

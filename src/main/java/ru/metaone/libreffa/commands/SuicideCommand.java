@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.commands;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.api.events.PlayerSuicideEvent;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -10,14 +10,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class SuicideCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (!sender.hasPermission("ffa.commands.suicide")) {
-            String noPermission = Main.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
+            String noPermission = LibreFFA.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
             sender.sendMessage(formatColors(noPermission));
             return true;
         }
@@ -32,7 +32,7 @@ public class SuicideCommand implements CommandExecutor {
             return true;
         }
         player.setHealth(0);
-        String iWantToSuicide = Main.getInstance().getConfig().getString("messages.i-want-to-die", "&cYou have committed suicide.");
+        String iWantToSuicide = LibreFFA.getInstance().getConfig().getString("messages.i-want-to-die", "&cYou have committed suicide.");
         sender.sendMessage(formatColors(PlaceholderAPI.setPlaceholders(player, iWantToSuicide)));
         return true;
     }

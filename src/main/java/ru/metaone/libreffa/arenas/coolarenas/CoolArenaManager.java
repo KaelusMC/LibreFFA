@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.arenas.coolarenas;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.kits.KitManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,16 +14,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.metaone.libreffa.Main.formatColors;
-import static ru.metaone.libreffa.Main.prefix;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
+import static ru.metaone.libreffa.LibreFFA.prefix;
 import static ru.metaone.libreffa.arenas.ArenaManager.lastArena;
 
 public class CoolArenaManager {
-    private static final Main main;
+    private static final LibreFFA main;
     public static final File coolArenasFolder;
 
     static {
-        main = Main.getInstance();
+        main = LibreFFA.getInstance();
         coolArenasFolder = new File(main.getDataFolder(), "arenas/coolarenas");
 
         if (!coolArenasFolder.exists()) {
@@ -105,7 +105,7 @@ public class CoolArenaManager {
 
     public static void warp(CommandSender sender, String playerName, String arenaName) {
         Player targetPlayer = Bukkit.getPlayerExact(playerName);
-        File kitsFolder = Main.getKitsFolder();
+        File kitsFolder = LibreFFA.getKitsFolder();
         if (targetPlayer != null) {
             File arenaFile = new File(coolArenasFolder, arenaName + ".yml");
             if (arenaFile.exists()) {

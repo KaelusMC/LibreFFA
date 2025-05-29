@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.arenas;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.api.events.PlayerWarpEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -16,16 +16,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ru.metaone.libreffa.Main.formatColors;
-import static ru.metaone.libreffa.Main.prefix;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
+import static ru.metaone.libreffa.LibreFFA.prefix;
 
 public class ArenaManager {
     public static Map<Player, String> lastArena = new HashMap<>();
-    private static final Main main;
+    private static final LibreFFA main;
     public static final File arenasFolder;
 
     static {
-        main = Main.getInstance();
+        main = LibreFFA.getInstance();
         arenasFolder = new File(main.getDataFolder(), "arenas");
 
         if (!arenasFolder.exists()) {

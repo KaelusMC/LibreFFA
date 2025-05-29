@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.combat;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.api.events.CombatEndEvent;
 import ru.metaone.libreffa.api.events.CombatStartEvent;
 import ru.metaone.libreffa.utils.ActionBarUtil;
@@ -21,23 +21,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class CombatTagger implements Listener {
 
-    private final Main main;
+    private final LibreFFA main;
     private static final List<Combat> combatLogs = new ArrayList<>();
     private final int combatLogDurationInSeconds;
     private BukkitTask task;
 
-    public CombatTagger(Main main, int combatLogDurationInSeconds) {
+    public CombatTagger(LibreFFA main, int combatLogDurationInSeconds) {
         this.main = main;
         this.combatLogDurationInSeconds = combatLogDurationInSeconds;
         this.task = Bukkit.getScheduler().runTaskTimerAsynchronously(main, this::updateCombatLogs, 4L, 8L);
     }
 
     private void updateCombatLogs() {
-        String actionBarMessage = Main.getInstance().getConfig().getString("combat-tagger.action-bar", "&7You're in combat for &b%seconds% &7seconds.");
+        String actionBarMessage = LibreFFA.getInstance().getConfig().getString("combat-tagger.action-bar", "&7You're in combat for &b%seconds% &7seconds.");
         for (Iterator<Combat> iterator = combatLogs.iterator(); iterator.hasNext(); ) {
             Combat combatLog = iterator.next();
 
@@ -91,9 +91,9 @@ public class CombatTagger implements Listener {
         Combat combatLog = getCombatLog(attacker, victim);
         if (combatLog == null) {
             if (getCombatLogs(attacker).isEmpty())
-                attacker.sendMessage(formatColors(Main.getInstance().getConfig().getString("combat-tagger.damage-to-enemy", "&7You attacked &b%victim%&7. Do not log out.").replace("%victim%", victim.getName())));
+                attacker.sendMessage(formatColors(LibreFFA.getInstance().getConfig().getString("combat-tagger.damage-to-enemy", "&7You attacked &b%victim%&7. Do not log out.").replace("%victim%", victim.getName())));
             if (getCombatLogs(victim).isEmpty())
-                victim.sendMessage(formatColors(Main.getInstance().getConfig().getString("combat-tagger.damage-from-enemy", "&7You got attacked by &b%attacker%&7. Do not log out.").replace("%attacker%", attacker.getName())));
+                victim.sendMessage(formatColors(LibreFFA.getInstance().getConfig().getString("combat-tagger.damage-from-enemy", "&7You got attacked by &b%attacker%&7. Do not log out.").replace("%attacker%", attacker.getName())));
             combatLogs.add(new Combat(attacker, victim, combatLogDurationInSeconds));
         } else
             combatLog.reset(combatLogDurationInSeconds);
@@ -102,14 +102,14 @@ public class CombatTagger implements Listener {
     public void endCombat(Combat combatLog) {
         Set<Player> players = combatLog.getPlayers();
         CombatEndEvent combatEndEvent = new CombatEndEvent(players);
-        Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTask(LibreFFA.getInstance(), () -> {
             Bukkit.getServer().getPluginManager().callEvent(combatEndEvent);
             if (combatEndEvent.isCancelled()) {
                 return;
             }
             combatLogs.remove(combatLog);
-            String messageType = Main.getInstance().getConfig().getString("combat-tagger.message-type", "action bar");
-            String notInCombatMessage = Main.getInstance().getConfig().getString("combat-tagger.combat-end", "&7You are no longer in combat.");
+            String messageType = LibreFFA.getInstance().getConfig().getString("combat-tagger.message-type", "action bar");
+            String notInCombatMessage = LibreFFA.getInstance().getConfig().getString("combat-tagger.combat-end", "&7You are no longer in combat.");
 
             combatLog.getPlayers().forEach(player -> {
                 player.setLevel(0);
@@ -142,7 +142,7 @@ public class CombatTagger implements Listener {
         Player player = event.getPlayer();
         if (isInCombat(player)) {
             String command = event.getMessage().split(" ")[0].substring(1);
-            FileConfiguration config = Main.getInstance().getConfig();
+            FileConfiguration config = LibreFFA.getInstance().getConfig();
             List<String> whitelistedCommands = config.getStringList("combat-tagger.whitelisted_commands");
 
             if (!whitelistedCommands.contains(command)) {

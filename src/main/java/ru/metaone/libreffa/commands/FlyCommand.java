@@ -1,13 +1,13 @@
 package ru.metaone.libreffa.commands;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class FlyCommand implements CommandExecutor {
 
@@ -20,7 +20,7 @@ public class FlyCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (!player.hasPermission("ffa.commands.fly")) {
-            String noPermission = Main.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
+            String noPermission = LibreFFA.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
             sender.sendMessage(formatColors(noPermission));
             return true;
         }
@@ -34,10 +34,10 @@ public class FlyCommand implements CommandExecutor {
         player.setAllowFlight(!player.getAllowFlight());
 
         if (player.getAllowFlight()) {
-            String flyEnabled = Main.getInstance().getConfig().getString("flightEnabled", "&aYour fly has been enabled.");
+            String flyEnabled = LibreFFA.getInstance().getConfig().getString("flightEnabled", "&aYour fly has been enabled.");
             player.sendMessage(formatColors(flyEnabled));
         } else {
-            String flyDisabled = Main.getInstance().getConfig().getString("flightDisabled", "&cYour fly has been disabled.");
+            String flyDisabled = LibreFFA.getInstance().getConfig().getString("flightDisabled", "&cYour fly has been disabled.");
             player.sendMessage(formatColors(flyDisabled));
         }
     }

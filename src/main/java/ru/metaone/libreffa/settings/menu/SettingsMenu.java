@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.settings.menu;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.settings.SettingsManager;
 import ru.metaone.libreffa.utils.gui.GuiBuilder;
 import ru.metaone.libreffa.utils.gui.ItemBuilderGUI;
@@ -18,7 +18,7 @@ import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class SettingsMenu extends GuiBuilder {
 
@@ -26,10 +26,10 @@ public class SettingsMenu extends GuiBuilder {
 
     static {
         try {
-            File configFile = new File(Main.getInstance().getDataFolder(), "menus/settings_menu.yml");
+            File configFile = new File(LibreFFA.getInstance().getDataFolder(), "menus/settings_menu.yml");
             if (!configFile.exists()) {
                 configFile.getParentFile().mkdirs();
-                Main.getInstance().saveResource("menus/settings_menu.yml", false);
+                LibreFFA.getInstance().saveResource("menus/settings_menu.yml", false);
             }
             settingsConfig = YamlConfiguration.loadConfiguration(configFile);
         } catch (Exception e) {
@@ -88,7 +88,7 @@ public class SettingsMenu extends GuiBuilder {
                 .build();
 
         inventory.setItem(slot, item, p -> {
-            Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskAsynchronously(LibreFFA.getInstance(), () -> {
                 SettingsManager.toggleSetting(player, settingKey);
                 String updatedStatus = SettingsManager.getSettingStatus(player, settingKey);
                 List<String> updatedLore = lore.stream()

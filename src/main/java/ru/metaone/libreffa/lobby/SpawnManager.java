@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.lobby;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.api.events.TeleportToSpawnEvent;
 import ru.metaone.libreffa.settings.SettingsManager;
 import ru.metaone.libreffa.spawnitems.Items;
@@ -22,13 +22,13 @@ import org.bukkit.potion.PotionEffectType;
 import java.io.File;
 import java.io.IOException;
 
-import static ru.metaone.libreffa.Main.formatColors;
-import static ru.metaone.libreffa.Main.prefix;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
+import static ru.metaone.libreffa.LibreFFA.prefix;
 import static ru.metaone.libreffa.utils.MiscListener.createQuickRespawnItem;
 
 public class SpawnManager implements Listener {
 
-    private static final Main main = Main.getInstance();
+    private static final LibreFFA main = LibreFFA.getInstance();
     private static final FileConfiguration spawnConfig = YamlConfiguration.loadConfiguration(new File(main.getDataFolder(), "arenas/spawn.yml"));
 
     public SpawnManager() {

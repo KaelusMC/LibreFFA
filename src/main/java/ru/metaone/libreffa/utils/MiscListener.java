@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.utils;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.api.events.QuickRespawnEvent;
 import ru.metaone.libreffa.arenas.ArenaManager;
 import ru.metaone.libreffa.commands.PingCommand;
@@ -30,22 +30,22 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 import java.util.*;
 
-import static ru.metaone.libreffa.Main.formatColors;
-import static ru.metaone.libreffa.Main.prefix;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
+import static ru.metaone.libreffa.LibreFFA.prefix;
 import static ru.metaone.libreffa.arenas.Arenas.getLastArena;
 import static ru.metaone.libreffa.kits.Kits.getLastKit;
 import static org.bukkit.Bukkit.getLogger;
 
 public class MiscListener implements Listener {
 
-    private final Main main;
+    private final LibreFFA main;
     Scoreboard board;
     Objective objective;
     private boolean healthBarEnabled;
     private Set<String> disabledWorlds;
     private String healthBarDisplayNameFormat;
 
-    public MiscListener(Main main) {
+    public MiscListener(LibreFFA main) {
         this.main = main;
         loadConfigSettings();
         if (healthBarEnabled) {
@@ -90,14 +90,14 @@ public class MiscListener implements Listener {
             return;
         }
 
-        String clickAction = Main.getInstance().getConfig().getString("quick-respawn.click-action", "BOTH");
+        String clickAction = LibreFFA.getInstance().getConfig().getString("quick-respawn.click-action", "BOTH");
         if (!clickAction.equalsIgnoreCase("BOTH") &&
                 ((clickAction.equalsIgnoreCase("LEFT") && !e.getAction().name().contains("LEFT")) ||
                         (clickAction.equalsIgnoreCase("RIGHT") && !e.getAction().name().contains("RIGHT")))) {
             return;
         }
 
-        String materialName = Main.getInstance().getConfig().getString("quick-respawn.material");
+        String materialName = LibreFFA.getInstance().getConfig().getString("quick-respawn.material");
         if (materialName == null) {
             return;
         }
@@ -127,8 +127,8 @@ public class MiscListener implements Listener {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), kitCmd);
             ArenaManager.warp(null, player, arena);
 
-            String messageType = Main.getInstance().getConfig().getString("quick-respawn.message-type", "action bar");
-            String message = Main.getInstance().getConfig().getString("quick-respawn.message", "&aTeleported to your last location.");
+            String messageType = LibreFFA.getInstance().getConfig().getString("quick-respawn.message-type", "action bar");
+            String message = LibreFFA.getInstance().getConfig().getString("quick-respawn.message", "&aTeleported to your last location.");
 
             if (messageType.equalsIgnoreCase("chat")) {
                 player.sendMessage(formatColors(message));
@@ -141,19 +141,19 @@ public class MiscListener implements Listener {
     }
 
     public static ItemStack createQuickRespawnItem() {
-        String materialName = Main.getInstance().getConfig().getString("quick-respawn.material");
+        String materialName = LibreFFA.getInstance().getConfig().getString("quick-respawn.material");
         Material material = Material.matchMaterial(materialName);
 
         if (material == null) {
-            Main.getInstance().getLogger().severe("Invalid material specified for quick-respawn item " + materialName);
+            LibreFFA.getInstance().getLogger().severe("Invalid material specified for quick-respawn item " + materialName);
             return null;
         }
 
         ItemStack itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();
         if (meta != null) {
-            String itemName = Main.getInstance().getConfig().getString("quick-respawn.item-name", "§aQuick Respawn");
-            List<String> lore = Main.getInstance().getConfig().getStringList("quick-respawn.lore");
+            String itemName = LibreFFA.getInstance().getConfig().getString("quick-respawn.item-name", "§aQuick Respawn");
+            List<String> lore = LibreFFA.getInstance().getConfig().getStringList("quick-respawn.lore");
 
             meta.setDisplayName(formatColors(itemName));
 
@@ -198,7 +198,7 @@ public class MiscListener implements Listener {
                 player.sendMessage(formatColors(" "));
             }
         }
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(LibreFFA.getInstance(), () -> {
             SettingsManager.ensurePlayerSettings(player);
             if (healthBarEnabled && !isWorldDisabled(player.getWorld())) {
                 updateHealthBar(player);

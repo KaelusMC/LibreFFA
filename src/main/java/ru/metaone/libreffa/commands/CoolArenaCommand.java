@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.commands;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.arenas.coolarenas.CoolArenaManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class CoolArenaCommand implements CommandExecutor, TabCompleter {
 
@@ -25,13 +25,13 @@ public class CoolArenaCommand implements CommandExecutor, TabCompleter {
         Player player = (Player) sender;
 
         if (!player.hasPermission("ffa.coolarena.use")) {
-            String noPermission = Main.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
+            String noPermission = LibreFFA.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
             sender.sendMessage(formatColors(noPermission));
             return true;
         }
 
         if (args.length != 1) {
-            String usageCoolArena = Main.getInstance().getConfig().getString("usage.coolarena", "&cUsage, /coolarena <arenaName>");
+            String usageCoolArena = LibreFFA.getInstance().getConfig().getString("usage.coolarena", "&cUsage, /coolarena <arenaName>");
             player.sendMessage(formatColors(usageCoolArena));
             return true;
         }

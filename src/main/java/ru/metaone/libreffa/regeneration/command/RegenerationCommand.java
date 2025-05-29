@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.regeneration.command;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.regeneration.RegenerationImpl;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ru.metaone.libreffa.Main.formatColors;
-import static ru.metaone.libreffa.Main.prefix;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
+import static ru.metaone.libreffa.LibreFFA.prefix;
 
 public class RegenerationCommand implements CommandExecutor, TabCompleter {
     private static final List<String> ACTIONS = Arrays.asList("create", "delete", "start", "corner1", "corner2", "regenerate");
@@ -24,7 +24,7 @@ public class RegenerationCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player) && !sender.hasPermission("ffa.admin")) {
-            String noPermission = Main.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
+            String noPermission = LibreFFA.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
             sender.sendMessage(formatColors(noPermission));
             return true;
         }
@@ -47,7 +47,7 @@ public class RegenerationCommand implements CommandExecutor, TabCompleter {
         switch (action) {
             case "create":
                 if (arena != null) {
-                    sender.sendMessage(Main.formatColors(prefix + "&7An arena with that name already exists."));
+                    sender.sendMessage(LibreFFA.formatColors(prefix + "&7An arena with that name already exists."));
                     return true;
                 }
                 arena = new RegenerationImpl(arenaName, null, null);
@@ -55,21 +55,21 @@ public class RegenerationCommand implements CommandExecutor, TabCompleter {
                 RegenerationImpl.saveAll();
                 RegenerationImpl.loadAll();
                 RegenerationImpl.arenas().add(arena);
-                sender.sendMessage(Main.formatColors(prefix + "&7Arena " + arenaName + " has been successfully created."));
+                sender.sendMessage(LibreFFA.formatColors(prefix + "&7Arena " + arenaName + " has been successfully created."));
                 break;
             case "delete":
                 if (arena == null) {
-                    sender.sendMessage(Main.formatColors(prefix + "&7Arena not found."));
+                    sender.sendMessage(LibreFFA.formatColors(prefix + "&7Arena not found."));
                     return true;
                 }
 
                 arena.delete();
-                sender.sendMessage(Main.formatColors(prefix + "&7Arena " + arenaName + " deleted."));
+                sender.sendMessage(LibreFFA.formatColors(prefix + "&7Arena " + arenaName + " deleted."));
                 break;
             case "corner1":
             case "corner2":
                 if (!(sender instanceof Player)) {
-                    sender.sendMessage(Main.formatColors(prefix + "&7This command can only be executed by players."));
+                    sender.sendMessage(LibreFFA.formatColors(prefix + "&7This command can only be executed by players."));
                     return true;
                 }
 
@@ -77,7 +77,7 @@ public class RegenerationCommand implements CommandExecutor, TabCompleter {
                 Location playerLocation = player.getLocation();
 
                 if (arena == null) {
-                    sender.sendMessage(Main.formatColors(prefix + "&7Arena not found."));
+                    sender.sendMessage(LibreFFA.formatColors(prefix + "&7Arena not found."));
                     return true;
                 }
 
@@ -88,11 +88,11 @@ public class RegenerationCommand implements CommandExecutor, TabCompleter {
                 }
 
                 arena.save();
-                sender.sendMessage(Main.formatColors(prefix + "&7Corner " + action.substring(6) + " set successfully."));
+                sender.sendMessage(LibreFFA.formatColors(prefix + "&7Corner " + action.substring(6) + " set successfully."));
                 break;
             case "start":
                 if (arena == null) {
-                    sender.sendMessage(Main.formatColors(prefix + "&7Arena not found."));
+                    sender.sendMessage(LibreFFA.formatColors(prefix + "&7Arena not found."));
                     return true;
                 }
 
@@ -100,20 +100,20 @@ public class RegenerationCommand implements CommandExecutor, TabCompleter {
                 if (arena.corner1() != null && arena.corner2() != null) {
                     arena.saveSchematic();
                     arena.start();
-                    sender.sendMessage(Main.formatColors(prefix + "&7Regeneration started."));
+                    sender.sendMessage(LibreFFA.formatColors(prefix + "&7Regeneration started."));
                 } else {
-                    sender.sendMessage(Main.formatColors(prefix + "&7Regeneration failed to start. You need to have both corner1 and corner2 set."));
+                    sender.sendMessage(LibreFFA.formatColors(prefix + "&7Regeneration failed to start. You need to have both corner1 and corner2 set."));
                 }
                 break;
             case "regenerate":
                 if (arena == null) {
-                    sender.sendMessage(Main.formatColors(prefix + "&7Arena not found."));
+                    sender.sendMessage(LibreFFA.formatColors(prefix + "&7Arena not found."));
                     return true;
                 }
 
                 arena.load();
                 arena.regenerate();
-                sender.sendMessage(Main.formatColors(prefix + "&7Arena " + arenaName + " has been regenerated."));
+                sender.sendMessage(LibreFFA.formatColors(prefix + "&7Arena " + arenaName + " has been regenerated."));
                 break;
         }
         return true;

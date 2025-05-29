@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.spawnitems;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
@@ -12,9 +12,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 public class EventListener implements Listener {
-    private Main main;
+    private LibreFFA main;
 
-    public EventListener(Main main) {
+    public EventListener(LibreFFA main) {
         this.main = main;
     }
 

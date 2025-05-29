@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.commands;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.utils.SitUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class SitCommand implements CommandExecutor {
 
@@ -19,19 +19,19 @@ public class SitCommand implements CommandExecutor {
         }
 
         if (!player.hasPermission("ffa.commands.sit")) {
-            String noPermission = Main.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
+            String noPermission = LibreFFA.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
             sender.sendMessage(formatColors(noPermission));
             return true;
         }
 
         if (SitUtil.isSitting(player)) {
-            String alreadySitting = Main.getInstance().getConfig().getString("messages.already-sitting" , "&cYou are already sitting.");
+            String alreadySitting = LibreFFA.getInstance().getConfig().getString("messages.already-sitting" , "&cYou are already sitting.");
             player.sendMessage(formatColors(alreadySitting));
             return true;
         }
 
         SitUtil.sit(player, player.getLocation().add(0, -0.7, 0));
-        String sitting = Main.getInstance().getConfig().getString("messages.now-sitting" , "&aYou are now sitting.");
+        String sitting = LibreFFA.getInstance().getConfig().getString("messages.now-sitting" , "&aYou are now sitting.");
         player.sendMessage(formatColors(sitting));
 
         return true;

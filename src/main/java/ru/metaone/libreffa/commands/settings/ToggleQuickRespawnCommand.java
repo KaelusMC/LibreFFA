@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.commands.settings;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.settings.SettingsManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,14 +18,14 @@ public class ToggleQuickRespawnCommand implements CommandExecutor {
 
         SettingsManager.toggleSetting(player, "toggleQuickRespawn");
 
-        String toggleMessage = Main.getInstance().getConfig().getString("messages.setting_toggle");
+        String toggleMessage = LibreFFA.getInstance().getConfig().getString("messages.setting_toggle");
 
         String status = SettingsManager.getUnformattedSettingStatus(player, "toggleQuickRespawn");
         String msg = toggleMessage
                 .replace("{setting_name}", "Quick Respawn")
                 .replace("{setting_status}", status);
 
-        player.sendMessage(Main.formatColors(msg));
+        player.sendMessage(LibreFFA.formatColors(msg));
 
         return true;
     }

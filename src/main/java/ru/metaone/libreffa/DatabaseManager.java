@@ -8,8 +8,8 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static ru.metaone.libreffa.Main.formatColors;
-import static ru.metaone.libreffa.Main.prefix;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
+import static ru.metaone.libreffa.LibreFFA.prefix;
 
 public class DatabaseManager {
 
@@ -17,7 +17,7 @@ public class DatabaseManager {
 
     public static void connect() {
         try {
-            File dataFolder = Main.getInstance().getDataFolder();
+            File dataFolder = LibreFFA.getInstance().getDataFolder();
             if (!dataFolder.exists()) {
                 dataFolder.mkdirs();
             }

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class RulesCommand implements CommandExecutor {
 

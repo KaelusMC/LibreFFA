@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.commands;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.stats.StatsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class StatsCommand implements CommandExecutor {
 
@@ -39,7 +39,7 @@ public class StatsCommand implements CommandExecutor {
 
     private List<String> getFormattedStats(UUID targetUUID) {
         List<String> formattedStats = new ArrayList<>();
-        FileConfiguration config = Main.getInstance().getConfig();
+        FileConfiguration config = LibreFFA.getInstance().getConfig();
         String playerName = getPlayerName(targetUUID);
 
         for (String format : config.getStringList("messages.stats.format")) {

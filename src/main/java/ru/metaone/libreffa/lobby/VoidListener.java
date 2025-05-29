@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.lobby;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,10 +12,10 @@ import java.util.Set;
 
 public class VoidListener implements Listener {
 
-    private final Main main;
+    private final LibreFFA main;
     private final Set<Player> teleportedPlayers;
 
-    public VoidListener(Main main) {
+    public VoidListener(LibreFFA main) {
         this.main = main;
         this.teleportedPlayers = new HashSet<>();
     }

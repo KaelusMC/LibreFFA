@@ -1,6 +1,6 @@
 package ru.metaone.libreffa.commands;
 
-import ru.metaone.libreffa.Main;
+import ru.metaone.libreffa.LibreFFA;
 import ru.metaone.libreffa.api.events.NicknameClearEvent;
 import ru.metaone.libreffa.api.events.NicknameSetEvent;
 import org.bukkit.Bukkit;
@@ -17,16 +17,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import static ru.metaone.libreffa.Main.formatColors;
+import static ru.metaone.libreffa.LibreFFA.formatColors;
 
 public class NickCommand implements CommandExecutor {
 
-    private final Main main;
+    private final LibreFFA main;
     private final File configFile;
     private static FileConfiguration dataConfig;
     private final List<String> blacklist;
 
-    public NickCommand(Main main) {
+    public NickCommand(LibreFFA main) {
         this.main = main;
         this.configFile = new File(main.getDataFolder(), "/data/nickname-data.yml");
         dataConfig = YamlConfiguration.loadConfiguration(configFile);
@@ -42,13 +42,13 @@ public class NickCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (!player.hasPermission("ffa.commands.nickname")) {
-            String noPermission = Main.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
+            String noPermission = LibreFFA.getInstance().getConfig().getString("messages.no-permission", "&cNo Permission.");
             sender.sendMessage(formatColors(noPermission));
             return true;
         }
 
         if (args.length == 0) {
-            String nickCmdUsage = Main.getInstance().getConfig().getString("usage.nickname", "&cUsage, /nick <nickname> | /nick clear");
+            String nickCmdUsage = LibreFFA.getInstance().getConfig().getString("usage.nickname", "&cUsage, /nick <nickname> | /nick clear");
             player.sendMessage(formatColors(nickCmdUsage));
             return true;
         }
@@ -60,11 +60,11 @@ public class NickCommand implements CommandExecutor {
 
         String nickname = args[0];
         if (isBlacklisted(nickname)) {
-            String nickBlacklisted = Main.getInstance().getConfig().getString("messages.nick-blacklisted", "&cThis nickname contains blacklisted words.");
+            String nickBlacklisted = LibreFFA.getInstance().getConfig().getString("messages.nick-blacklisted", "&cThis nickname contains blacklisted words.");
             player.sendMessage(formatColors(nickBlacklisted));
             return true;
         }
-        String nickChanged = Main.getInstance().getConfig().getString("messages.nick-changed", "&aYour nickname has been set to %nickname%").replace("%nickname%", nickname);
+        String nickChanged = LibreFFA.getInstance().getConfig().getString("messages.nick-changed", "&aYour nickname has been set to %nickname%").replace("%nickname%", nickname);
         player.sendMessage(formatColors(nickChanged));
         saveNickname(player.getUniqueId(), nickname);
 
@@ -97,7 +97,7 @@ public class NickCommand implements CommandExecutor {
                     return;
                 }
                 player.setDisplayName(player.getName());
-                String nickCleared = Main.getInstance().getConfig().getString("messages.nick-cleared", "&aYour nickname has been cleared.");
+                String nickCleared = LibreFFA.getInstance().getConfig().getString("messages.nick-cleared", "&aYour nickname has been cleared.");
                 player.sendMessage(formatColors(nickCleared));
                 dataConfig.set(player.getUniqueId().toString(), null);
                 try {
