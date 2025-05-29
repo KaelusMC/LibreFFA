@@ -253,29 +253,6 @@ public class MiscListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent e) {
-        if (Main.getInstance().getConfig().getBoolean("chat-formatter.enabled")) {
-            Player player = e.getPlayer();
-            String message = e.getMessage();
-
-            String format = Main.getInstance().getConfig().getString("chat-formatter.format");
-            String formatMsg = PlaceholderAPI.setPlaceholders(player, format)
-                    .replace("%message%", message)
-                    .replace("%player%", player.getName());
-            e.setFormat(formatColors(formatMsg));
-
-            for (Player recipient : Bukkit.getOnlinePlayers()) {
-                String playerName = recipient.getName();
-                if (message.contains(playerName)) {
-                    if (SettingsManager.hasEnabledSetting(recipient, "mentionSound")) {
-                        recipient.playSound(recipient.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1.0f, 1.0f);
-                    }
-                }
-            }
-        }
-    }
-
-    @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
         if (e.getRightClicked() instanceof Player) {
             Player clickedPlayer = (Player) e.getRightClicked();
