@@ -29,5 +29,5 @@ replay_pid*
 .paper-nms
 .gradle
 ..gradle
-output
+build
 src/main/java/dev/darkxx/ffa/guilds

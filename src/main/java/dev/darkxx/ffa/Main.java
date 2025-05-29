@@ -32,7 +32,6 @@ import dev.darkxx.ffa.tasks.ClipboardCleaner;
 import dev.darkxx.ffa.tasks.UpdateTask;
 import dev.darkxx.ffa.utils.MiscListener;
 import dev.darkxx.ffa.utils.gui.GuiManager;
-import dev.darkxx.xyriskits.api.XyrisKitsAPI;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -69,11 +68,6 @@ public final class Main extends JavaPlugin {
         kitsFolder = KitManager.createKitsFolder();
         Register();
         Commands();
-
-        if (getServer().getPluginManager().isPluginEnabled("XyrisKits")) {
-            XyrisKitsAPI.initialize();
-            Bukkit.getConsoleSender().sendMessage(formatColors(prefix + "&7XyrisKits detected. &7Enabled support for &bXyrisKits &7plugin."));
-        }
 
         try {
             File configFile = new File(Main.getInstance().getDataFolder(), "menus/settings_menu.yml");
@@ -155,16 +149,18 @@ public final class Main extends JavaPlugin {
         getCommand("setspawn").setExecutor(new SpawnCommands(spawnManager, this));
         getCommand("spawn").setExecutor(new SpawnCommands(spawnManager, this));
         getServer().getPluginManager().registerEvents(new VoidListener(this), this);
+
         // Death Messages
         deathMessagesManager = new DeathMessagesManager(this);
+
         // Combat Tagger
         int combatTimer = getConfig().getInt("combat-tagger.combat-timer");
         combatTagger = new CombatTagger(this, combatTimer);
         getServer().getPluginManager().registerEvents(combatTagger, this);
+
         // BStats
-        // The plugin is named "xFFA" because the name "FFA" is already taken on BStats. "x" stands for Xyris, which is our organization's name.
-        Metrics metrics = new Metrics(this, 21736);
-        metrics.addCustomChart(new Metrics.SimplePie("xffa-chart", () -> "xFFA"));
+        Metrics metrics = new Metrics(this, 26027);
+
         // ProtocolLib
         if (Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
             new OldDamageTilt(this);
@@ -180,7 +176,8 @@ public final class Main extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage(formatColors(prefix + "&7FastAsyncWorldEdit not found, Regeneration will not work."));
         }
         // Updater
-        UpdateTask.run();
+        //UpdateTask.run();
+
         // Clipboard Cleaner
         long delay = 0L;
         long period = 10800L * 20L;

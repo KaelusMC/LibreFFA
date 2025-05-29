@@ -2,7 +2,6 @@ package dev.darkxx.ffa.arenas.coolarenas;
 
 import dev.darkxx.ffa.Main;
 import dev.darkxx.ffa.kits.KitManager;
-import dev.darkxx.xyriskits.api.XyrisKitsAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -126,12 +125,7 @@ public class CoolArenaManager {
                     if (config.contains("kit")) {
                         String kitName = config.getString("kit");
 
-                        if (Bukkit.getServer().getPluginManager().isPluginEnabled("XyrisKits")) {
-                            assert kitName != null;
-                            XyrisKitsAPI.getKitsAPI().giveKit(targetPlayer, kitName);
-                        } else {
-                            KitManager.giveKit(targetPlayer, kitName);
-                        }
+                        KitManager.giveKit(targetPlayer, kitName);
 
                     }
                     sender.sendMessage(formatColors(prefix + "&7Warped " + targetPlayer.getName() + " to cool arena " + arenaName));

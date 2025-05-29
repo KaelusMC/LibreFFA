@@ -8,7 +8,6 @@ import dev.darkxx.ffa.commands.PingCommand;
 import dev.darkxx.ffa.settings.SettingsManager;
 import dev.darkxx.ffa.stats.StatsManager;
 import dev.darkxx.ffa.tasks.UpdateTask;
-import dev.darkxx.xyriskits.api.XyrisKitsAPI;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -114,11 +113,9 @@ public class MiscListener implements Listener {
         Player player = e.getPlayer();
         String playerName = player.getName();
         String kit;
-        if (Bukkit.getServer().getPluginManager().isPluginEnabled("XyrisKits")) {
-            kit = XyrisKitsAPI.getKitsAPI().getLastKit(player);
-        } else {
-            kit = getLastKit(player);
-        }
+
+        kit = getLastKit(player);
+
         String arena = getLastArena(player);
         QuickRespawnEvent onQuickR = new QuickRespawnEvent(player, item, arena, kit);
         Bukkit.getServer().getPluginManager().callEvent(onQuickR);
@@ -128,12 +125,8 @@ public class MiscListener implements Listener {
         }
 
         if (!kit.equals("none") && !arena.equals("none")) {
-            String kitCmd;
-            if (Bukkit.getServer().getPluginManager().isPluginEnabled("XyrisKits")) {
-                kitCmd = "xyriskits:kits give " + playerName + " " + kit;
-            } else {
-                kitCmd = "ffa kits give " + playerName + " " + kit;
-            }
+            String kitCmd = "ffa kits give " + playerName + " " + kit;
+
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), kitCmd);
             ArenaManager.warp(null, player, arena);
 
@@ -323,7 +316,7 @@ public class MiscListener implements Listener {
     public static void heal(Player player) {
         player.getInventory().clear();
         player.getActivePotionEffects().forEach(pe -> player.removePotionEffect(pe.getType()));
-        player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+        player.setHealth(player.getAttribute(Attribute.MAX_HEALTH).getValue());
         player.setFoodLevel(20);
         player.setSaturation(0);
         player.setFireTicks(0);

@@ -33,7 +33,7 @@ public class DeathMessagesManager implements Listener {
 
     private void loadConfig(JavaPlugin plugin) {
         config = plugin.getConfig();
-        disabled = config.getBoolean("deathMessages.disabled")
+        disabled = config.getBoolean("deathMessages.disabled");
         if (config.isList("deathMessages.messages")) {
             deathMessages = config.getStringList("deathMessages.messages");
         } else {

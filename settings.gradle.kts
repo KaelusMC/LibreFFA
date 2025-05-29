@@ -1,1 +1,1 @@
-rootProject.name = "FFA"
+rootProject.name = "LibreFFA"

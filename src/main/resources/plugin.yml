@@ -1,4 +1,4 @@
-name: FFA
+name: LibreFFA
 version: '1.0.4'
 main: dev.darkxx.ffa.Main
 api-version: '1.19'
@@ -6,11 +6,14 @@ softdepend:
   - PlaceholderAPI
   - ProtocolLib
   - FastAsyncWorldEdit
-  - XyrisKits
 authors:
   - Darkxx
   - XyrisPlugins
 description: A Next Gen 1.19 FFA Core.
+
+libraries:
+  - com.zaxxer:HikariCP:5.1.0
+  - org.apache.httpcomponents:httpmime:4.5.6
 
 commands:
   ffa:
