@@ -1,6 +1,6 @@
 name: LibreFFA
 version: '1.0.4'
-main: dev.darkxx.ffa.Main
+main: ru.metaone.libreffa.Main
 api-version: '1.19'
 softdepend:
   - PlaceholderAPI
